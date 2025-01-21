@@ -4,11 +4,11 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "evento")
+@Table(name = "evento") //mettila sempre al plurale d'ora in poi!!
 public class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //come il SERIAL in PostgreSQL
     private Long id;
     @Column(nullable = false)
     private String titolo;
