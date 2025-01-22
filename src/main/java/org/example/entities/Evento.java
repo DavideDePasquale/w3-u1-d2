@@ -2,6 +2,8 @@ package org.example.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "evento") //mettila sempre al plurale d'ora in poi!!
@@ -21,17 +23,25 @@ public class Evento {
     private tipoEvento tipoEvento;
     @Column(name = "numero_max_partecipanti", nullable = false)
     private int numeroMassimoPartecipanti;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+    @OneToMany(mappedBy = "evento")
+    private List<Partecipazione> listaPartecipazioni;
+
 
     public Evento() {
         //verrà utilizzato da Postgres
     }
 
-    public Evento(String titolo, LocalDate dataEvento, String descrizione, org.example.entities.tipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+    public Evento(String titolo, LocalDate dataEvento, String descrizione, org.example.entities.tipoEvento tipoEvento, int numeroMassimoPartecipanti, Location location) {
         this.titolo = titolo;
         this.dataEvento = dataEvento;
         this.descrizione = descrizione;
         this.tipoEvento = tipoEvento;
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
+        this.location = location;
+        this.listaPartecipazioni = new ArrayList<Partecipazione>();
     }
 
     public Long getId() {
@@ -82,6 +92,22 @@ public class Evento {
         this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
     }
 
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public List<Partecipazione> getListaPartecipazioni() {
+        return listaPartecipazioni;
+    }
+
+    public void setListaPartecipazioni(List<Partecipazione> listaPartecipazioni) {
+        this.listaPartecipazioni = listaPartecipazioni;
+    }
+
     @Override
     public String toString() {
         return "Evento{" +
@@ -91,6 +117,8 @@ public class Evento {
                 ", descrizione='" + descrizione + '\'' +
                 ", tipoEvento=" + tipoEvento +
                 ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
+                ", location=" + location +
+                ", listaPartecipazioni=" + listaPartecipazioni +
                 '}';
     }
 }

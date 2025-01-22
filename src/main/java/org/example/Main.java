@@ -1,13 +1,18 @@
 package org.example;
 
+import com.github.javafaker.Faker;
 import org.example.dao.EventoDAO;
-import org.example.entities.Evento;
-import org.example.entities.tipoEvento;
+import org.example.dao.LocationDAO;
+import org.example.dao.PartecipazioneDAO;
+import org.example.dao.PersonaDAO;
+import org.example.entities.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+
 import java.time.LocalDate;
+import java.util.Locale;
 
 /**
  * Hello world!
@@ -20,23 +25,28 @@ public class Main
     public static void main( String[] args ) {
 
         EventoDAO eventoDao = new EventoDAO(em);
+        LocationDAO locationDao = new LocationDAO(em);
+        PersonaDAO personaDao = new PersonaDAO(em);
+        PartecipazioneDAO partecipazioneDao = new PartecipazioneDAO(em);
+        Faker faker = new Faker(Locale.ITALY);
+
+        //Location l1 = new Location(faker.name().name(),faker.address().city());
+        //locationDao.save(l1);
+        /*Persona p1 = new Persona(
+                faker.name().firstName(),
+                faker.name().lastName(),
+                faker.internet().emailAddress(),
+                LocalDate.of(1980,10,25),
+                TipoSesso.F); */
+        //personaDao.save(p1);
+     //  Evento e1 = new Evento("Finale Coppa",LocalDate.of(2025,1,25),"Super finale di coppa", tipoEvento.PUBBLICO,100,locationDao.getbyID(1));
+      //  eventoDao.save(e1);
+        Partecipazione p1 = new Partecipazione(personaDao.getByID(2),eventoDao.getbyID(1),TipoStato.CONFERMATA);
+        partecipazioneDao.save(p1);
 
 
-      Evento evento1 = new Evento("Festa di Carnevale", LocalDate.of(2025,01,20),"Festa a tema, entrata obbligatoria con la maschera", tipoEvento.PUBBLICO,132);
-      Evento evento2 = new Evento("Diciottesimo Carlo", LocalDate.of(2025,06,05),"Festa di compleanno",tipoEvento.PRIVATO,55);
-      Evento evento3 = new Evento("Nozze d'Oro Elisa e Mauro", LocalDate.of(2025,03,25),"Festa anniversario matrimonio",tipoEvento.PRIVATO,28);
-      Evento evento4 = new Evento("Compleanno Davide", LocalDate.of(2026,06,05),"Festa di compleanno",tipoEvento.PRIVATO,60);
-      Evento evento5 = new Evento("Festa Aziendale PAPPAPPERO SRL", LocalDate.of(2025,05,10),"Festa Aziendale",tipoEvento.PRIVATO,267);
-      Evento evento6 = new Evento("Concerto Nino D'Angelo", LocalDate.of(2025,12,23),"Concerto Nino D'Angelo",tipoEvento.PUBBLICO,1000);
-//      save(evento1);
 
-//      save(evento2);
-//      save(evento3);
-//      save(evento4);
-//      save(evento5);
-//      save(evento6);
-        Evento ev = eventoDao.getbyID(7);
-        eventoDao.remove(ev);
+
     em.close();
     emf.close();
     }
