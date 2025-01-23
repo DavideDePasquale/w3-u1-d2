@@ -6,7 +6,6 @@ import org.example.dao.LocationDAO;
 import org.example.dao.PartecipazioneDAO;
 import org.example.dao.PersonaDAO;
 import org.example.entities.*;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -41,8 +40,8 @@ public class Main
         //personaDao.save(p1);
      //  Evento e1 = new Evento("Finale Coppa",LocalDate.of(2025,1,25),"Super finale di coppa", tipoEvento.PUBBLICO,100,locationDao.getbyID(1));
       //  eventoDao.save(e1);
-        Partecipazione p1 = new Partecipazione(personaDao.getByID(2),eventoDao.getbyID(1),TipoStato.CONFERMATA);
-        partecipazioneDao.save(p1);
+       // Partecipazione p1 = new Partecipazione(personaDao.getByID(2),eventoDao.getbyID(1),TipoStato.CONFERMATA);
+        // partecipazioneDao.save(p1);
 
 
 

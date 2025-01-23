@@ -5,12 +5,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Entity
 @Table(name = "evento") //mettila sempre al plurale d'ora in poi!!
-public class Evento {
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public abstract class Evento {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) //come il SERIAL in PostgreSQL
+    @GeneratedValue //come il SERIAL in PostgreSQL
     private Long id;
     @Column(nullable = false)
     private String titolo;

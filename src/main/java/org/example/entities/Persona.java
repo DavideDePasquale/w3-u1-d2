@@ -21,18 +21,22 @@ public class Persona {
     private TipoSesso sesso;
     @OneToMany(mappedBy = "persona")
     private List<Partecipazione> listaPartecipazioni;
+    @ManyToOne
+    @JoinColumn(name = "gara_di_atletica_id")
+    private GaraDiAtletica garaDiAtletica;
 
 
     public Persona() {
     }
 
-    public Persona(String nome, String cognome, String email, LocalDate dataDiNascita, TipoSesso sesso) {
+    public Persona(String nome, String cognome, String email, LocalDate dataDiNascita, TipoSesso sesso, GaraDiAtletica garaDiAtletica) {
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
         this.dataDiNascita = dataDiNascita;
         this.sesso = sesso;
         this.listaPartecipazioni = new ArrayList<Partecipazione>();
+        this.garaDiAtletica = garaDiAtletica;
     }
 
     public long getId() {
@@ -91,6 +95,14 @@ public class Persona {
         this.listaPartecipazioni = listaPartecipazioni;
     }
 
+    public GaraDiAtletica getGaraDiAtletica() {
+        return garaDiAtletica;
+    }
+
+    public void setGaraDiAtletica(GaraDiAtletica garaDiAtletica) {
+        this.garaDiAtletica = garaDiAtletica;
+    }
+
     @Override
     public String toString() {
         return "Persona{" +
@@ -101,6 +113,7 @@ public class Persona {
                 ", dataDiNascita=" + dataDiNascita +
                 ", sesso=" + sesso +
                 ", listaPartecipazioni=" + listaPartecipazioni +
+                ", garaDiAtletica=" + garaDiAtletica +
                 '}';
     }
 }
